@@ -1,0 +1,16 @@
+---
+title: "Subsetting Cheat Sheet"
+author: "Sean Westwood"
+classoption: landscape
+geometry: margin=1.5cm
+output: pdf_document
+---
+\small
+| Task |	Code |
+|---------|---------|
+| Select all rows where the value of the variable grade is 1 | \texttt{govt10[govt10\$grade == 1,] } |
+| Select on the age column where the value of the variable grade is 1 | \texttt{govt10\$age[govt10\$grade == 1] } | 
+| Select all rows where the value of the variable grade is 1 and instructor is "Sean" | \texttt{govt10[govt10\$grade ==1 \& govt10\$instructor == "Sean",] } |
+| Select all rows where the variable instructor is either "Sean" or "Daenerys" | \texttt{govt10[govt10\$instructor == "Sean" $|$ govt10\$instructor == "Daenerys",] } |
+| Set (and create) the value of burnt equal to 0 if the instructor is "Daenerys"  | \texttt{govt10\$burnt[govt10\$instructor == "Daenerys"] <- 0 } |
+| Create a new dataframe with only rows where age is >20 | \texttt{elderly <- govt10[govt10\$age > 20,] } | 
