@@ -1,0 +1,78 @@
+---
+title: "Quiz 1"
+author: ""
+output: pdf_document
+---
+
+```{r setup, echo=F}
+library(knitr)
+opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+knitr::opts_chunk$set(error = TRUE)
+```
+
+This quiz is based on: Pierotti, Rachel. (2013). "[Increasing Rejection of Intimate Partner Violence: Evidence of Global Cultural Diffusion](http://dx.doi.org/10.1177/0003122413480363)." *American Sociological Review*, 78: 240-265. 
+
+The Demographic and Health Surveys, initiated in 1992, encompass over 300 surveys across developing nations. These surveys feature standardized questions and interviewer training, allowing for cross-country data comparisons. 
+
+The study illustrates that women with greater exposure to global cultural norms—through urban living, secondary education, or media access—are more inclined to reject intimate partner violence. The dataset the following variables.
+
+| Name            | Description                                                             |
+|-----------------|-------------------------------------------------------------------------|
+| `beat_goesout`  | Percentage of women in each country that think a husband is justified   |
+|                 | to beat his wife if she goes out without telling him.                   |
+| `beat_burnfood` | Percentage of women in each country that think a husband is justified   |
+|                 | to beat his wife if she burns his food.                                 |
+| `no_media`      | Percentage of women in each country that rarely encounter a newspaper,  |
+|                 | radio or television                                                   |
+| `sec_school`    | Percentage of women in each country with secondary or higher education. |
+| `year`          | Year of the survey                                                      |
+| `region`        | Region of the world                                                     |
+| `country`       | Country                                                                 |
+
+```{r}
+ipv <- read.csv("ipv.csv")
+```
+
+**Round all answers to two decimals**
+
+# Question 1
+
+What is the highest level of support for beating a woman for burning food across all years? Note that multiple countries are repeated in the dataset at different years.  
+
+```{r}
+
+```
+Answer: 
+
+# Question 2
+
+What is the difference is support for `beat_goesout` between 2000 and 2012? (Always subtract the second value from the first)
+
+```{r}
+
+```
+Answer: 
+
+# Question 3
+What is the difference in support for `beat_burnfood` in the region with the highest support on this variable and the region with the lowest support on this variable? 
+
+```{r}
+
+```
+Answer: 
+
+# Question 4
+What is the average percentage of respondents with no access to media in 2014?
+
+```{r}
+
+```
+Answer: 
+
+# Question 5
+How many countries in the dataset are in Europe or North America?
+
+```{r}
+
+```
+Answer: 
