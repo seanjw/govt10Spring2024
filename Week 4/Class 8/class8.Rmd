@@ -1,0 +1,90 @@
+---
+title: "Class 8"
+author: "Sean Westwood"
+header-includes:
+   - \usepackage{pdfpages}
+output:
+  pdf_document: default
+---
+
+```{r setup, echo=F}
+library(knitr)
+opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+knitr::opts_chunk$set(error = TRUE)
+```
+
+Plan:
+
+* Summarizing Bivariate Relationships
+* Quiz 2
+
+## Summarizing Bivariate Relationships
+
+We often want to know about the relationship between two variables.  We will start by visualizing the relationship between two continuous variables.
+
+```{r}
+partisan.affect <- read.csv("affect.csv")
+```
+
+### Scatterplot
+
+A scatterplot plots one variable against another in order to visualize their relationship.
+
+```{r}
+plot(partisan.affect$republican.therm, partisan.affect$democrat.therm,
+	 xlab = "Republican Feeling Therm.",
+	 ylab = "Democratic Feeling Therm.",
+	 pch=16)
+
+```
+
+1. Real data are often messy and a relationship take some time to identify.  We might (rightly) suspect that the relationship between party feeling thermometers might be different by party affiliation.  We can separately plot points for Democrats and Republicans, but this requires a few steps.  First we create a blank plot.
+
+```{r}
+plot(partisan.affect$republican.therm, partisan.affect$democrat.therm,
+	 xlab = "Republican Feeling Therm.",
+	 ylab = "Democratic Feeling Therm.",
+	 pch=16,
+	 type = "n")
+```
+
+2. Next we need to create two subsets of the data (Democrats only and Republicans only).  
+```{r}
+
+```
+
+3. We will then add each group separately.
+NOTE: You cannot run the code below line by line, you must run it all at once with the green plus button.
+
+```{r}
+plot(partisan.affect$republican.therm, partisan.affect$democrat.therm,
+	 xlab = "Republican Feeling Therm.",
+	 ylab = "Democratic Feeling Therm.",
+	 pch=16,
+	 type = "n")
+points(partisan.affect.dem$republican.therm, partisan.affect.dem$democrat.therm, pch=16, col = "blue")
+```
+
+4. Now do this for Republicans, but make each point a red square. (You will need to copy and paste the code from the prior block).
+
+```{r}
+
+```
+
+### Plotting means over multiple groupings
+
+1. One way to think about partisan affect is the extent to which people like their party more than the opposing party.  To do this we compute a difference score (subtract one value from another).  Here we want to subtract out-party feeling therms from in-party feeling therms.  This means that we need to create two new variables: inparty and outparty and conditionally set their values based on the partisanship of the respondent.  Note that you will need to subset on both sides of the <- operand.
+
+```{r}
+
+```
+
+
+### Quiz 2
+
+## Evaluation
+
+1. On a scale ranging between 1 (Too Hard) and 10 (Too Easy), how was today's class: 
+2. What was the easiest thing to understand?
+3. What was the most difficult thing to understand?
+4. How long did you spend on the assignment outside of class?

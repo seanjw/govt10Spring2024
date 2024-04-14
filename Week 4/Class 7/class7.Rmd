@@ -1,0 +1,149 @@
+---
+title: "Class 7"
+author: "Sean Westwood"
+output:
+  pdf_document: default
+---
+
+```{r setup, echo=F}
+library(knitr)
+opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+knitr::opts_chunk$set(error = TRUE)
+```
+
+Plan:
+
+* Measurement
+* Visualizing data 
+* Sampling
+
+# Measurement
+
+# Visualizing the univariate distribution 
+
+It is useful and efficient to summarize data with descriptive statistics, but reducing many observations to a few statistics often makes it hard to see patterns in the data.  Today we will visualize our data with a series of plots.
+
+```{r}
+afghan <- read.csv("afghan.csv")
+```
+
+## Barplot
+
+Barplots are useful when we want to understand the distribution of a factor (they are used in other cases, but we will not cover them in this class).  Barplots represent group-level statistics, so they require us to summarize the data first.   Here we will supply a prop.table() object to generate a barplot of proportions.
+
+```{r}
+ISAF.ptable <- prop.table(table(ISAF = afghan$violent.exp.ISAF,
+                                exclude = NULL))
+```
+
+The various plot functions in R take MANY arguments.  We can supply labels for each axis, the caption for the plot, etc.  Two useful arguments are ylim and xlim.  These allow us to specify the range for an axis.  For example, `ylim = c(0, 0.7)` tells R to start the y-axis at 0 and to end it at .7.
+
+```{r}
+barplot(ISAF.ptable,
+        names.arg = c("No harm", "Harm", "Non-response"),
+        main = "Civilian victimization by the ISAF",
+        xlab = "Response category",
+        ylab = "Proportion of the respondents", 
+		ylim = c(0, 0.7))
+```
+
+1. Now do this for Taliban violence (see class 6 if you need a refresher of the variables in this file).
+
+```{r}
+
+```
+
+## Histograms
+
+The histogram is a method of visualizing the distribution of a numeric variable.  There are two varieties of histograms: frequency and density.  
+
+A histogram divides the data into bins where the area of each bin represents the proportion of observations that fall within the bin. The height of each bin is called density, which is equal to the proportion of observations within each bin divided by the width of the bin. A histogram approximates the distribution of a variable.
+
+Compare the two histograms below:
+
+```{r}
+hist(afghan$age, 
+	 freq = TRUE, 
+	 ylim = c(0, 0.04), 
+	 xlab = "Age",
+     main = "Distribution of Respondent's Age")
+```
+
+```{r}
+hist(afghan$age, 
+	 freq = FALSE, 
+	 ylim = c(0, 0.04), 
+	 xlab = "Age",
+     main = "Distribution of Respondent's Age")
+```
+
+A density histogram creates bins (groups) where the area of each bin in a histogram equals the proportion of observations that fall in that bin.  Formally, $$ density = \frac{the\: proportion\: of\: observations\: in\: the\: bin}{the\: width\: of\: the\: bin} $$
+
+## Partisan affect
+
+We define affective polarization as the tendency of people identifying as Republicans or Democrats to view opposing partisans negatively and copartisans positively. This affective separation is a result of classifying opposing partisans as members of an out-group and copartisans as members of an in-group. The standard definition of an out-group is a group to which a person does not belong, whereas an in-group is a group to which a person does belong. Research in psychology generally shows that members of an in-group frequently ascribe undesirable or inappropriate traits to members of out-groups, though some high-status out-groups such as whites are viewed positively by out-group members. 
+
+We will work with a survey of 2,153 American adults conducted in July of 2017.  Respondents answered basic demographic questions and reported their feelings toward Democrats and Republicans using a feeling thermometer (a measure of fallibility where 0 is very unfavorable and 100 is very favorable).
+
+| Name             | Description                      |
+|------------------|----------------------------------|
+| republican.therm | Feeling toward Republicans 0-100 |
+| democrat.therm   | Feeling toward Democrats 0-100   |
+| gender           | Gender: male or female           |
+| race             | Race                             |
+| partisanship     | Partisan affiliation             |
+| income           | Income (categorical)             |
+| education        | Education (categorical)          |
+| age              | Age                              |
+| religion         | Religion (categorical)           |
+
+```{r}
+read.csv("affect.csv")
+```
+
+1.  Create histograms for republican.therm and democrat.therm.
+```{r}
+
+```
+
+2. What do the histograms tell us about partisan affect for all people in the sample?
+
+3. Now, subset the data to just Democrats.  Generate histograms for republican.therm and democrat.therm
+```{r}
+
+```
+
+4. What do you notice?
+
+5. It is often useful to add information to plots (the mean, the median, etc.).  R makes this easy.  We can annotate a plot with text and lines.  The *abline()* function allows us to draw lines on plots that we have already rendered.  
+
+abline() expects us to provide a point in the x-axis where we want our vertical line to intersect.  We can embed a function when supplying the argument.  Copy the code you used to create the republican.therm plot in point 3 into the chunk below and add the median.
+
+```{r}
+abline(v = median(partisan.affect$republican.therm))
+```
+
+6. We can change the style of lines by adding additional arguments:
+
+| argument  | detail                                                                             |
+|-----------|------------------------------------------------------------------------------------|
+| col     | specifies the color to use, such as "blue" and "red".                              |
+| lty       | specifies the type of line to be drawn using either a character or a numeric value |
+| lwd       | specifies the thickness of lines where lwd = 1 is the default value.               |
+
+Google for the lty to make a dashed line.  Add a dashed, blue line to our plot at the mean.
+
+```{r}
+
+```
+
+
+
+## Sampling
+
+## Evaluation
+
+1. On a scale ranging between 1 (Too Hard) and 10 (Too Easy), how was today's class: 
+2. What was the easiest thing to understand?
+3. What was the most difficult thing to understand?
+4. How long did you spend on the assignment outside of class?
