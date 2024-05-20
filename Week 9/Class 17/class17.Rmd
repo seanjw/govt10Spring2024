@@ -1,0 +1,58 @@
+---
+title: "Class 17"
+author: "Sean Westwood"
+header-includes:
+   - \usepackage{pdfpages}
+output:
+  pdf_document: default
+---
+```{r setup, echo=F}
+library(knitr)
+opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+knitr::opts_chunk$set(error = TRUE)
+```
+
+# Statistical significance: Confidence intervals
+
+## Calculating Confidence intervals
+
+```{r}
+transfer <- read.csv("transfer.csv")
+```
+
+Difference in means: t.test()
+
+```{r}
+t.test(transfer$literate91[transfer$pop82 <= median(transfer$pop82)],
+       transfer$literate91[transfer$pop82 >= median(transfer$pop82)])
+```
+
+Regression: confint()
+
+```{r}
+model <- lm(literate91~pop82, data = transfer)
+confint(model)
+```
+
+Proportion: prop.test()
+
+```{r}
+transfer$big <- 0
+transfer$big[transfer$pop82 >10000] <- 1
+
+transfer$poor <- 1
+transfer$poor[transfer$poverty91 <.6] <- 0
+
+tab <- table(transfer$big, transfer$poor)
+
+prop.test(tab,conf.level = 0.95)
+
+```
+
+
+## Evaluation
+
+1. On a scale ranging between 1 (Too Hard) and 10 (Too Easy), how was today's class: 
+2. What was the easiest thing to understand?
+3. What was the most difficult thing to understand?
+4. How long did you spend on the assignment outside of class?

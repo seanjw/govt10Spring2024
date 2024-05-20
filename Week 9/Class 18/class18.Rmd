@@ -1,0 +1,163 @@
+---
+title: "Class 18"
+author: "Sean Westwood"
+header-includes:
+   - \usepackage{pdfpages}
+output:
+  pdf_document: default
+---
+```{r setup, echo=F}
+library(knitr)
+opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+knitr::opts_chunk$set(error = TRUE)
+```
+
+# Example
+
+```{r}
+STAR <- read.csv("STAR.csv")
+```
+
+| Name       | Description                                                                                     |
+|------------|-------------------------------------------------------------------------------------------------|
+| race       | student's race (White = 1, Black = 2, Asian = 3, Hispanic = 4, Native American = 5, Others = 6) |
+| classtype  | type of kindergarten class (small = 1, regular = 2, regular with aid = 3)                       |
+| g4math     | total scaled score for math portion of fourth grade standardized test                           |
+| g4reading  | total scaled score for reading portion of fourth grade standardized test                        |
+| yearssmall | number of years in small classes                                                                |
+| hsgrad     | high school graduation (did graduate = 1, did not graduate = 0)                                 |
+
+1. We employ the t.test() function.  Note the differences in the results to these two calls. 
+
+```{r}
+
+star_sub <- STAR[STAR$classtype == 1 | STAR$classtype == 2,]
+
+t.test(star_sub$g4reading[star_sub$classtype == 2], star_sub$g4reading[star_sub$classtype == 1])
+(t <- t.test(star_sub$g4reading~ star_sub$classtype))
+
+```
+
+We extract information from the t-test:
+
+CIs
+```{r}
+t$conf.int[1]
+t$conf.int[2]
+```
+
+Means
+```{r}
+t$estimate[1]
+t$estimate[2]
+
+# or just the number 
+
+t$estimate[[1]]
+t$estimate[[2]]
+```
+
+P-value
+```{r}
+t$p.value
+```
+
+
+2. Repeat the test above, but use math test scores.  Compute the difference in means using results from the t-test.  Also extract and output the CIs.
+```{r}
+
+```
+
+3. Draft a null hypothesis and a hypothesis for differences that might exist between class size and achievement among minorities. 
+
+
+4. Subset the data to just minorities (non-whites) and then run a one-sided t.test comparing math scores for small classes with regular classes.  Can you reject the null?
+
+```{r}
+
+```
+
+5. Interpret your results.
+
+# Uncertainty and linear models
+
+## Two examples
+
+### Women and water
+
+We take advantage of a randomized policy experiment in India where, since the mid-1990s, one-third of village council heads have been randomly reserved for female politicians. The CSV data set women.csv contains a subset of this data from West Bengal. The policy was implemented at the level of government called Gram Panchayat or GP. Each GP contains many villages. For this study, two villages were selected at random within each GP for detailed data collection. 
+
+```{r}
+women <- read.csv("women.csv")
+```
+
+| Name       | Description                                         |
+|------------|-----------------------------------------------------|
+| GP         | an identifier for the Gram Panchayat (GP)           |
+| village    | identifier for each village                         |
+| reserved   | GP was reserved for women leaders or not            |
+| female     | GP had a female leader or not                       |
+| irrigation | number of new or repaired irrigation facilities     |
+| water      | number of new or repaired drinking water facilities |
+
+1. Draft a hypothesis on the relationship between the reservation policy and water projects.
+
+2. Fit a linear regression model with water as the dependent measure and reserved as the predictor. Output standard errors and p-values with summary() and confidence intervals with confint().
+
+```{r}
+
+```
+
+3. Interpret your results. What do we make of the efficacy of the policy to reserve seats? What can you say about your hypothesis?
+
+4. Draft a hypothesis on the relationship between the reservation policy and irrigation projects.
+
+5. Fit a linear regression model with irrigation as the dependent measure and reserved as the predictor. Output standard errors and p-values with summary() and confidence intervals with confint().
+
+```{r}
+
+```
+
+6. Interpret your results. What do we make of the efficacy of the policy to reserve seats? What can you say about your hypothesis?
+
+### Minimum wage
+
+```{r}
+minwage <- read.csv("minwage.csv")
+```
+
+In 1992, the state of New Jersey (NJ) in the United States raised the minimum wage from \$4.25 to \$5.05 per hour. Did such an increase in minimum wage reduce employment as economic theory predicts? As discussed above, answering this question requires inference about the NJ employment rate in the absence of such a raise in minimum wage. Since this counterfactual outcome is not observable, we must somehow estimate it using observed data
+
+| Name       | Description                                                        |
+|------------|--------------------------------------------------------------------|
+| chain      | name of fastfood restaurant chain                                  |
+| location   | location of restaurants (centralNJ, northNJ, PA, shoreNJ, southNJ) |
+| wageBefore | wage before the minimum wage increase                              |
+| wageAfter  | wage after the minimum wage increase                               |
+| fullBefore | number of full-time employees before the minimum wage increase     |
+| fullAfter  | number of full-time employees after the minimum wage increase      |
+| partBefore | number of part-time employees before the minimum wage increase     |
+| partAfter  | number of part-time employees after the minimum wage increase      |
+
+0. Compute the proportion of full-time employment before the minimum wage increase and after the minimum wage increase.  Also create a dummy for location (PA=0 and NJ=1).
+```{r}
+
+```
+
+1. Draft a hypothesis on the relationship between New Jersey and the proportion of full time employees after the reform.
+
+2. Fit a regression model with fullPropAfter as the dependent measure and with NJ, fullPropBefore, wageBefore and chain as the predictor variables.  Output standard errors and p-values with summary() and confidence intervals with confint().
+
+```{r}
+
+```
+
+3. Interpret your results. What do we make of the policy change in New Jersey? What can you say about your hypothesis?
+
+## Evaluation
+
+1. On a scale ranging between 1 (Too Hard) and 10 (Too Easy), how was today's class: 
+2. What was the easiest thing to understand?
+3. What was the most difficult thing to understand?
+4. How long did you spend on the assignment outside of class?
+
