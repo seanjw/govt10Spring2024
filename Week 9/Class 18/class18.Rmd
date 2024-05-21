@@ -1,8 +1,6 @@
 ---
 title: "Class 18"
 author: "Sean Westwood"
-header-includes:
-   - \usepackage{pdfpages}
 output:
   pdf_document: default
 ---
@@ -27,43 +25,28 @@ STAR <- read.csv("STAR.csv")
 | yearssmall | number of years in small classes                                                                |
 | hsgrad     | high school graduation (did graduate = 1, did not graduate = 0)                                 |
 
-1. We employ the t.test() function.  Note the differences in the results to these two calls. 
+1. We are interested in the difference between reading scores for the small and regular class sizes (excluding regular classes with aide)?  
+
+What might a hypothesis be?
+
+What might a null hypothesis be?
+
+Is the difference significant? 
 
 ```{r}
-
 star_sub <- STAR[STAR$classtype == 1 | STAR$classtype == 2,]
 
 t.test(star_sub$g4reading[star_sub$classtype == 2], star_sub$g4reading[star_sub$classtype == 1])
-(t <- t.test(star_sub$g4reading~ star_sub$classtype))
 
 ```
 
-We extract information from the t-test:
 
-CIs
-```{r}
-t$conf.int[1]
-t$conf.int[2]
-```
+2. Repeat question 1, but use math test scores.  Also combine regular and regular with aide calsses. 
+What might a hypothesis be?
 
-Means
-```{r}
-t$estimate[1]
-t$estimate[2]
+What might a null hypothesis be?
 
-# or just the number 
-
-t$estimate[[1]]
-t$estimate[[2]]
-```
-
-P-value
-```{r}
-t$p.value
-```
-
-
-2. Repeat the test above, but use math test scores.  Compute the difference in means using results from the t-test.  Also extract and output the CIs.
+Is the difference significant? 
 ```{r}
 
 ```
@@ -71,7 +54,7 @@ t$p.value
 3. Draft a null hypothesis and a hypothesis for differences that might exist between class size and achievement among minorities. 
 
 
-4. Subset the data to just minorities (non-whites) and then run a one-sided t.test comparing math scores for small classes with regular classes.  Can you reject the null?
+4. Subset the data to just minorities (non-whites) and then run t.test comparing math scores for small classes with regular classes.  Can you reject the null?
 
 ```{r}
 
@@ -102,7 +85,7 @@ women <- read.csv("women.csv")
 
 1. Draft a hypothesis on the relationship between the reservation policy and water projects.
 
-2. Fit a linear regression model with water as the dependent measure and reserved as the predictor. Output standard errors and p-values with summary() and confidence intervals with confint().
+2. Fit a linear regression model with water as the dependent measure and reserved as the independent measure. Output standard errors and p-values with summary() and confidence intervals with confint().
 
 ```{r}
 
@@ -139,20 +122,20 @@ In 1992, the state of New Jersey (NJ) in the United States raised the minimum wa
 | partBefore | number of part-time employees before the minimum wage increase     |
 | partAfter  | number of part-time employees after the minimum wage increase      |
 
-0. Compute the proportion of full-time employment before the minimum wage increase and after the minimum wage increase.  Also create a dummy for location (PA=0 and NJ=1).
+1. Compute the proportion of full-time employment before the minimum wage increase and after the minimum wage increase.  Also create a dummy for location (PA=0 and NJ=1).
 ```{r}
 
 ```
 
-1. Draft a hypothesis on the relationship between New Jersey and the proportion of full time employees after the reform.
+2. Draft a hypothesis on the relationship between New Jersey and the proportion of full time employees after the reform.
 
-2. Fit a regression model with fullPropAfter as the dependent measure and with NJ, fullPropBefore, wageBefore and chain as the predictor variables.  Output standard errors and p-values with summary() and confidence intervals with confint().
+3. Fit a regression model with fullPropAfter as the dependent measure and with NJ, fullPropBefore, wageBefore and chain as the predictor variables.  Output standard errors and p-values with summary() and confidence intervals with confint().
 
 ```{r}
 
 ```
 
-3. Interpret your results. What do we make of the policy change in New Jersey? What can you say about your hypothesis?
+4. Interpret your results. What do we make of the policy change in New Jersey? What can you say about your hypothesis?
 
 ## Evaluation
 
